@@ -1,0 +1,66 @@
+﻿<Window x:Class="SchockApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SchockApp"
+        mc:Ignorable="d"
+        x:Name="Hauptfenster" Title="MainWindow" Height="224" Width="519" ResizeMode="NoResize" IsEnabled="True" WindowStartupLocation="CenterScreen" Loaded="Main_load">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+          Grid.Column="0"/>
+
+        <Grid Grid.Row="0"
+          Grid.Column="1"/>
+
+        <Grid Grid.Row="0"
+          Grid.Column="2"/>
+
+
+        <Grid Grid.Row="1"
+          Grid.Column="0"
+          Grid.ColumnSpan="2"/>
+
+        <Grid Grid.Row="2"
+          Grid.Column="0"
+          Grid.ColumnSpan="2">
+            <Button x:Name="loadOldSession" IsTabStop="False" Content="Alte Spielkonfiguration laden" Grid.Column="0" MinWidth="20" MinHeight="5" Margin="20,15,124,15" Click="loadOldSession_Click"/>
+        </Grid>
+
+        <Label Content="Name des Spielers" Grid.Column="2" Grid.Row="0" HorizontalContentAlignment="Left"/>
+        <TextBox x:Name="playerName" Grid.Column="2" Grid.Row="0" VerticalAlignment="Stretch" Margin="20"/>
+        <Label Content="Club des Spielers" Grid.Column="2" Grid.Row="1" HorizontalContentAlignment="Left"/>
+        <TextBox x:Name="playersClub" Grid.Column="2" Grid.Row="1" VerticalAlignment="Stretch" Margin="20"/>
+        <Button x:Name="save" Content="In die Liste aufnehmen" Grid.Column="2" Grid.Row="2" MinWidth="20" MinHeight="5" Margin="15" Click="save_Click"/>
+        <Button x:Name="showTable" Content="Starten" IsTabStop="False" Grid.Column="0" Grid.Row="0" MinWidth="20" MinHeight="5" Margin="15" Click="showTable_Click"/>
+        <Label Content="Anzahl 5er Tische" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Left" Margin="0,18,0,44" Grid.RowSpan="2" />
+        <TextBox x:Name="amountTable5" IsTabStop="False" Text="0" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20,41,20,0" Height="21"/>
+        <Label Content="Anzahl 3er Tische" Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Left" Margin="0,-3,0,3"/>
+        <TextBox x:Name="amountTable3" IsTabStop="False" Text="0" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" Margin="20,19,20,0"/>
+        <Button x:Name="changeOption" IsTabStop="False" Content="Ändern" Grid.Column="1" Grid.Row="2" MinWidth="20" MinHeight="5" Margin="15" Click="changeOption_Click"/>
+        <Button x:Name="showPlayers" IsTabStop="False" Content="Eingetragene Spieler anzeigen" Grid.Column="0" Grid.Row="1" MinWidth="20" MinHeight="5" Margin="15" Click="showPlayers_Click"/>
+        <StackPanel Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Orientation="Horizontal">
+            <Button IsTabStop="False">OK</Button>
+            <Button IsTabStop="False">Beenden</Button>
+        </StackPanel>
+        <Label Content="Anzahl 4er Tische" Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Left" Margin="0,36,0,26" Grid.RowSpan="2"/>
+        <TextBox x:Name="amountTable4" IsTabStop="False" Text="10" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="20,0,20,0"/>
+    </Grid>
+
+</Window>
