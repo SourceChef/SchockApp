@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.IO;
 
 namespace SchockApp
@@ -8,10 +12,14 @@ namespace SchockApp
         public static string ultimatePath = "";
         public void CreateFile(string[] data)
         {
-            string path = "C:\\Users\\"+Environment.UserName+"\\Desktop\\SchockTurnier"; 
+            string path = "C:\\Users\\"+Environment.UserName+"\\Desktop\\SchockTurnier";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
             if (!File.Exists(path+"\\SchockTurnier.txt"))
             {
-                File.Create(path+ "\\SchockTurnier.txt");
+                using (File.Create(path + "\\SchockTurnier.txt")) ;
                 ultimatePath = path + "\\SchockTurnier.txt";
                 writeFile(data);
             }
@@ -70,32 +78,22 @@ namespace SchockApp
             killAllText();
             try
             {
-                using (StreamWriter writer = new StreamWriter("C:\\Users\\"+Environment.UserName+"\\Desktop\\test\\SchockTurnier.txt", true))
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\"+Environment.UserName+"\\Desktop\\SchockTurnier\\SchockTurnier.txt", true))
                 {
                     //Hier wird die eingabe des Spielernamen und des Clubs in eine Textdatei gespeichert
                     foreach (var item in Spieler.spielers)
                     {
                         writer.WriteLine("Spielername:" + item.Name);
-                        writer.Flush();
                         writer.WriteLine("Club:" + item.Club);
-                        writer.Flush();
                         writer.WriteLine("Punkte:" + item.Punkte);
-                        writer.Flush();
                         writer.WriteLine("Punkte erste Runde:" + item.PunkteR1);
-                        writer.Flush();
                         writer.WriteLine("Punkte zweite Runde:" + item.PunkteR2);
-                        writer.Flush();
                         writer.WriteLine("Punkte dritte Runde:" + item.PunkteR3);
-                        writer.Flush();
                         writer.WriteLine("Punkte vierte Runde:" + item.PunkteR4);
-                        writer.Flush();
                         writer.WriteLine("Punkte Viertelfinale:" + item.ViertelF);
-                        writer.Flush();
                         writer.WriteLine("Punkte Halbfinale:" + item.HalbF);
-                        writer.Flush();
                         writer.WriteLine("Punkte Finale:" + item.Finale1);
                         writer.Flush();
-
                     }
                 }
 
@@ -103,11 +101,12 @@ namespace SchockApp
             catch (Exception e)
             {
 
-                throw;
+                MainWindow mainwindow = new MainWindow() ;
+                mainwindow.exeptionInfo();
             }
 
         }
-        // Hier wird eine Textdatei ausgelsen und in ein 2d Array gespeichert
+        // Hier wird eine Textdatei ausgelesen und in ein 2d Array gespeichert
         public static string[,] readFile(string path)
         {
             string[,] player = new string[100, 10];

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SchockApp": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace SchockApp
 {
@@ -19,26 +26,37 @@ namespace SchockApp
             InitializeComponent();
         }
         public string runde = "1";
+        public int T3 = SpielfeldCode.Anzahl3;
+        public int T4 = SpielfeldCode.Anzahl4;
+        public int T5 = SpielfeldCode.Anzahl5;
+        public int gesamtT = SpielfeldCode.gesamtTische;
+        public bool firstTime = true;
         private int spielfeldCodeCheck()
         {
             #region PlayersPerTable
             //Anzahl der Spieler pro Tisch
             int z = 0;
-            if (SpielfeldCode.Anzahl3 >= 1)
+            if (T3 >= 1)
             {
                 z = 3;
-                SpielfeldCode.Anzahl3--;
+                if(firstTime == false)T3--;
             }
-            else if(SpielfeldCode.Anzahl4>=1)
+            else if(T4>=1)
             {
                 z = 4;
-                SpielfeldCode.Anzahl5--;
+                if (firstTime == false) T4--;
             }
-            else if (SpielfeldCode.Anzahl5 >= 1)
+            else if (T5 >= 1)
             {
                 z = 5;
-                SpielfeldCode.Anzahl5--;
+                if (firstTime == false) T5--;
             }
+            if(gesamtT == 0)
+            {
+                return 0;
+            }
+            if (firstTime == false) gesamtT--;
+            firstTime = false;
             return z;
             #endregion
         }
@@ -93,28 +111,32 @@ namespace SchockApp
             //Wenn eine neue runde beginnt, also alle Punkte der Vorrunde eingetragen bzw alle Punkte der neuen Runde auf 0 stehen wird die Spielerliste neu gemischt
             if(zaehler1 == 0 || zaehler1 < Spieler.spielers.Count)
             {
-               if (zaehler3 == 0) runde = "1";
-                if (zaehler1 == 0) MyExtensions.Shuffle(Spieler.spielers);
+               if (zaehler1 == 0) runde = "1";
+                if (zaehler1 == 0 && SpielfeldCode.shuffelR1 == false)
+                {
+                    MyExtensions.Shuffle(Spieler.spielers);
+                    SpielfeldCode.shuffelR1 = true;
+                }
             }
             else if (zaehler2 == 0 || zaehler2 < Spieler.spielers.Count)
             {
                 runde = "2";
-                if(zaehler2==0)MyExtensions.Shuffle(Spieler.spielers);
+                if(zaehler2==0 && SpielfeldCode.shuffelR2 == false)MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.shuffelR2 = true;
             }
             else if (zaehler3 == 0 || zaehler3 < Spieler.spielers.Count)
             {
                 runde = "3";
-                if (zaehler3 == 0) MyExtensions.Shuffle(Spieler.spielers);
+                if (zaehler3 == 0 && SpielfeldCode.shuffelR3 == false) MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.shuffelR3 = true;
             }
             else if (zaehler4 == 0 || zaehler4 < Spieler.spielers.Count)
             {
                 runde = "4";
-                if (zaehler4 == 0) MyExtensions.Shuffle(Spieler.spielers);
+                if (zaehler4 == 0 && SpielfeldCode.shuffelR4 == false) MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.shuffelR4 = true;
             }
             else if (zaehlerVf == 0 || zaehlerVf < Spieler.spielerFinale.Count)
             {
                 runde = "Viertelfinale";
-                if (zaehlerVf == 0) MyExtensions.Shuffle(Spieler.spielerFinale);
+                if (zaehlerVf == 0 && SpielfeldCode.shuffelVf == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.shuffelVf = true;
                 Spieler.viertelFinale = true;
                 SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl3,SpielfeldCode.Anzahl4,SpielfeldCode.Anzahl5);
                 Spieler.elemination();
@@ -122,7 +144,7 @@ namespace SchockApp
             else if (zaehlerHf == 0 || zaehlerHf < Spieler.spielerFinale.Count)
             {
                 runde = "Halbfinale";
-                if (zaehlerHf == 0) MyExtensions.Shuffle(Spieler.spielerFinale);
+                if (zaehlerHf == 0 && SpielfeldCode.shuffelHf == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.shuffelHf = true;
                 Spieler.halbFinale = true;
                 SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl3, SpielfeldCode.Anzahl4, SpielfeldCode.Anzahl5);
                 Spieler.eleminationHf();
@@ -130,7 +152,7 @@ namespace SchockApp
             else if (zaehlerFi == 0 || zaehlerFi < Spieler.spielerFinale.Count)
             {
                 runde = "Finale";
-                if (zaehlerFi == 0) MyExtensions.Shuffle(Spieler.spielerFinale);
+                if (zaehlerFi == 0 && SpielfeldCode.shuffelF == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.shuffelF = true;
                 Spieler.finalFinale = true;
                 SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl3, SpielfeldCode.Anzahl4, SpielfeldCode.Anzahl5);
                 Spieler.eleminationFi();
@@ -453,56 +475,57 @@ namespace SchockApp
             int colBorder = 2;
             for (int i = 1; i <= SpielfeldCode.gesamtTische; i++)
             {
+                if (z != 0){
+                    for (int j = 0; j < z; j++)
+                    {
 
-                for (int j = 0; j < z; j++)
-                {
+                        TextBlock textBlock = new TextBlock();
+                        TextBox textBox = new TextBox();
 
-                    TextBlock textBlock = new TextBlock();
-                    TextBox textBox = new TextBox();
+                        Border border = new Border();
+                        border.BorderThickness = new Thickness(2);
+                        border.BorderBrush = Brushes.Black;
+                        border.Margin = new Thickness(0, 5, 20, 0);
+                        border.Width = 80;
+                        border.Height = 20;
+                        border.Child = textBlock;
+                        Grid.SetRow(border, rowBorder);
+                        Grid.SetColumn(border, colBorder);
 
-                    Border border = new Border();
-                    border.BorderThickness = new Thickness(2);
-                    border.BorderBrush = Brushes.Black;
-                    border.Margin = new Thickness(0, 5, 20, 0);
-                    border.Width = 80;
-                    border.Height = 20;
-                    border.Child = textBlock;
-                    Grid.SetRow(border, rowBorder);
-                    Grid.SetColumn(border, colBorder);
-
-                    test.Children.Add(border);
-                    textblockList.Add(textBlock);
+                        test.Children.Add(border);
+                        textblockList.Add(textBlock);
 
 
-                    Border border1 = new Border();
-                    border1.BorderThickness = new Thickness(2);
-                    border1.Margin = new Thickness(0, 5, 5, 0);
-                    border1.BorderBrush = Brushes.Black;
-                    border1.Width = 40;
-                    border1.Height = 20;
-                    border1.Child = textBox;
-                    textBoxeList.Add(textBox);                   
-                    Grid.SetRow(border1, rowTextbox);
-                    Grid.SetColumn(border1, colTextbox);
+                        Border border1 = new Border();
+                        border1.BorderThickness = new Thickness(2);
+                        border1.Margin = new Thickness(0, 5, 5, 0);
+                        border1.BorderBrush = Brushes.Black;
+                        border1.Width = 40;
+                        border1.Height = 20;
+                        border1.Child = textBox;
+                        textBoxeList.Add(textBox);                   
+                        Grid.SetRow(border1, rowTextbox);
+                        Grid.SetColumn(border1, colTextbox);
 
-                    test.Children.Add(border1);
+                        test.Children.Add(border1);
 
-                    rowTextbox++;
-                    rowBorder++;
+                        rowTextbox++;
+                        rowBorder++;
+                    }
+                    if (i % 2 != 0) 
+                    {
+                        rowTextbox = 9;
+                        rowBorder = 9;
+                    }
+                    else
+                    {
+                        rowBorder = 2;
+                        rowTextbox = 2;
+                        colTextbox = colTextbox + 4;
+                        colBorder = colBorder + 4;
+                    }
+                    z = spielfeldCodeCheck();
                 }
-                if (i % 2 != 0) 
-                {
-                    rowTextbox = 9;
-                    rowBorder = 9;
-                }
-                else
-                {
-                    rowBorder = 2;
-                    rowTextbox = 2;
-                    colTextbox = colTextbox + 4;
-                    colBorder = colBorder + 4;
-                }
-                z = spielfeldCodeCheck();
                 SizeToContent = SizeToContent.WidthAndHeight;
             }
             listFiller();

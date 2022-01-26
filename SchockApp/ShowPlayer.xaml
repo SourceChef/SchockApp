@@ -23,7 +23,7 @@
 
         <Button Content="Spieler entfernen" HorizontalAlignment="Left" Height="45" Margin="117,20,0,0" VerticalAlignment="Top" Width="127" Click="Button_Click_1" Grid.Column="2" Grid.Row="2"/>
         <Button Content="zurück" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="127" Click="Button_Click" Grid.Column="2" Grid.Row="3" Margin="117,0,0,0"/>
-        <ListView  Name="liste" Margin="30,0,172,16" SelectedItem="" ItemsSource="{Binding}" Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3">
+        <ListView  Name="liste" Margin="30,0,172,16" SelectedItem="" ItemsSource="{Binding}" Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" SelectionChanged="liste_SelectionChanged">
             <ListView.Resources>
                 <GridView x:Key="one">
                     <GridViewColumn Header="Name" >

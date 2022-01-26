@@ -1,4 +1,10 @@
-﻿namespace SchockApp
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SchockApp
 {
     class SpielfeldCode 
     {
@@ -9,7 +15,13 @@
         public static int Anzahl3_1 = 0;
         public static int Anzahl4_1 = 0;
         public static int Anzahl5_1 = 0;
-
+        public static bool shuffelR1 = false;
+        public static bool shuffelR2 = false;
+        public static bool shuffelR3 = false;
+        public static bool shuffelR4 = false;
+        public static bool shuffelVf = false;
+        public static bool shuffelHf = false;
+        public static bool shuffelF = false;
         public static void tischeAktuallisieren(int t1,int t2,int t3)
         {
             Anzahl3 = t1;

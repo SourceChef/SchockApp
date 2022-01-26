@@ -1,6 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace SchockApp
 {
@@ -16,7 +26,7 @@ namespace SchockApp
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            int count = 1; 
+            int count = 1;
             foreach (var item in Spieler.spielers.OrderByDescending(x => x.GesamtPunkte).ToList())
             {
                 item.Position = count;
@@ -28,7 +38,7 @@ namespace SchockApp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(SpielfeldCode.Anzahl3_1, SpielfeldCode.Anzahl4_1, SpielfeldCode.Anzahl5_1);
             this.Close();
             mainWindow.ShowDialog();
         }

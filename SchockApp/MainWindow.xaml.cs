@@ -1,6 +1,18 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace SchockApp
 {
@@ -63,99 +75,108 @@ namespace SchockApp
         {
             // Hier wird die spielerListe geleert und neu beschrieben
             //Hier wird ein Textdokument ausgewählt und in ein 2d array gespeichert
-            string txt;
+            string txt = "";
             string[,] player = new string[100, 10];
             string[] updatePlayer = new string[500];
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                int a;
                 txt = openFileDialog.FileName;
                 player = DatenLesenSchreiben.readFile(txt);
             }
-            Spieler.spielers.Clear();
-
-            string name = "";
-            string club = "";
-            string punkte = "";
-            string R1 = "";
-            string R2 = "";
-            string R3 = "";
-            string R4 = "";
-            string Viertel = "";
-            string Halb = "";
-            string Finale = "";
-            int count = 1;
-            // Hier wird das array player auseinander genommen
-            // der zeichenzusatz spielername und club entfernt 
-            // und dem Konstruktor spieler übergeben um spieler 
-            // zu erzeugen
-            foreach (string item in player)
+            if(txt != string.Empty)
             {
-                updatePlayer[count - 1] = item;
-                if (item == null)
-                {
-                    break;
-                }
-                else if (item.StartsWith("Spielername:"))
-                {
-                    name = item;
-                    name = name.Remove(0, 12);
-                }
+                Spieler.spielers.Clear();
 
-                else if (item.StartsWith("Club:"))
+                string name = "";
+                string club = "";
+                string punkte = "";
+                string R1 = "";
+                string R2 = "";
+                string R3 = "";
+                string R4 = "";
+                string Viertel = "";
+                string Halb = "";
+                string Finale = "";
+                int count = 1;
+                // Hier wird das array player auseinander genommen
+                // der zeichenzusatz spielername und club entfernt 
+                // und dem Konstruktor spieler übergeben um spieler 
+                // zu erzeugen
+                foreach (string item in player)
                 {
-                    club = item;
-                    club = club.Remove(0, 5);
+                    updatePlayer[count - 1] = item;
+                    if (item == null)
+                    {
+                        break;
+                    }
+                    else if (item.StartsWith("Spielername:"))
+                    {
+                        name = item;
+                        name = name.Remove(0, 12);
+                    }
+
+                    else if (item.StartsWith("Club:"))
+                    {
+                        club = item;
+                        club = club.Remove(0, 5);
+                    }
+                    else if (item.StartsWith("Punkte:"))
+                    {
+                        punkte = item;
+                        punkte = punkte.Remove(0, 7);
+                    }
+                    else if (item.StartsWith("Punkte erste Runde:"))
+                    {
+                        R1 = item;
+                        R1 = R1.Remove(0, 19);
+                    }
+                    else if (item.StartsWith("Punkte zweite Runde:"))
+                    {
+                        R2 = item;
+                        R2 = R2.Remove(0, 20);
+                    }
+                    else if (item.StartsWith("Punkte dritte Runde:"))
+                    {
+                        R3 = item;
+                        R3 = R3.Remove(0, 20);
+                    }
+                    else if (item.StartsWith("Punkte vierte Runde:"))
+                    {
+                        R4 = item;
+                        R4 = R4.Remove(0, 20);
+                    }
+                    else if (item.StartsWith("Punkte Viertelfinale:"))
+                    {
+                        Viertel = item;
+                        Viertel = Viertel.Remove(0, 21);
+                    }
+                    else if (item.StartsWith("Punkte Halbfinale:"))
+                    {
+                        Halb = item;
+                        Halb = Halb.Remove(0, 18);
+                    }
+                    else if (item.StartsWith("Punkte Finale:"))
+                    {
+                        Finale = item;
+                        Finale = Finale.Remove(0, 14);
+                    }
+                    if (count % 10 == 0)
+                    {
+                        Spieler spieler = new Spieler(name, club, punkte, R1, R2, R3, R4,Viertel,Halb,Finale);
+                    }
+                        count++;
                 }
-                else if (item.StartsWith("Punkte:"))
-                {
-                    punkte = item;
-                    punkte = punkte.Remove(0, 7);
-                }
-                else if (item.StartsWith("Punkte erste Runde:"))
-                {
-                    R1 = item;
-                    R1 = R1.Remove(0, 19);
-                }
-                else if (item.StartsWith("Punkte zweite Runde:"))
-                {
-                    R2 = item;
-                    R2 = R2.Remove(0, 20);
-                }
-                else if (item.StartsWith("Punkte dritte Runde:"))
-                {
-                    R3 = item;
-                    R3 = R3.Remove(0, 20);
-                }
-                else if (item.StartsWith("Punkte vierte Runde:"))
-                {
-                    R4 = item;
-                    R4 = R4.Remove(0, 20);
-                }
-                else if (item.StartsWith("Punkte Viertelfinale:"))
-                {
-                    Viertel = item;
-                    Viertel = Viertel.Remove(0, 21);
-                }
-                else if (item.StartsWith("Punkte Halbfinale:"))
-                {
-                    Halb = item;
-                    Halb = Halb.Remove(0, 18);
-                }
-                else if (item.StartsWith("Punkte Finale:"))
-                {
-                    Finale = item;
-                    Finale = Finale.Remove(0, 14);
-                }
-                if (count % 10 == 0)
-                {
-                    Spieler spieler = new Spieler(name, club, punkte, R1, R2, R3, R4,Viertel,Halb,Finale);
-                }
-                    count++;
             }
-            DatenLesenSchreiben.updateFile();
-            MessageBox.Show("Daten wieder hergestellt");
+            if(txt != string.Empty) 
+            { 
+                DatenLesenSchreiben.updateFile();
+                MessageBox.Show("Daten wieder hergestellt");
+            }
+            else
+            {
+                MessageBox.Show("Keine neuen Daten ausgewählt");
+            }
         }
 
         private void showTable_Click(object sender, RoutedEventArgs e)
@@ -171,7 +192,20 @@ namespace SchockApp
             t1 = Int32.Parse(amountTable3.Text);
             t2 = Int32.Parse(amountTable4.Text);
             t3 = Int32.Parse(amountTable5.Text);
-            SpielfeldCode.tischeAktuallisieren(t1,t2,t3);
+            if (t1 + t2 + t3 > 10)
+            {
+                MessageBox.Show("Maximale Tischanzahl von 10 überschritten");
+            }
+            else SpielfeldCode.tischeAktuallisieren(t1,t2,t3);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        public void exeptionInfo()
+        {
+            MessageBox.Show("Keine Datei vorhanden");
         }
     }
 }
