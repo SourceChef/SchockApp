@@ -11,13 +11,13 @@ namespace SchockApp
         public static readonly List<Spieler> spielers = new List<Spieler>();
         public static readonly List<Spieler> helperList = new List<Spieler>();
         public static List<Spieler> spielerFinale = new List<Spieler>();
-        public static bool runde1 = false;
-        public static bool runde2 = false;
-        public static bool runde3 = false;
-        public static bool runde4 = false;
-        public static bool halbFinale = false;
-        public static bool viertelFinale = false;
-        public static bool finalFinale = false;
+        static bool runde1 = false;
+        static bool runde2 = false;
+        static bool runde3 = false;
+        static bool runde4 = false;
+        static bool halbFinale = false;
+        static bool viertelFinale = false;
+        static bool finalFinale = false;
         string name;
         string club;
         string punkte;
@@ -43,6 +43,13 @@ namespace SchockApp
         public string Finale1 { get => Finale; set => Finale = value; }
         public int GesamtPunkte { get => gesamtPunkte; set => gesamtPunkte = value; }
         public int Position { get => position; set => position = value; }
+        public static bool Runde1 { get => runde1; set => runde1 = value; }
+        public static bool Runde2 { get => runde2; set => runde2 = value; }
+        public static bool Runde3 { get => runde3; set => runde3 = value; }
+        public static bool Runde4 { get => runde4; set => runde4 = value; }
+        public static bool HalbFinale { get => halbFinale; set => halbFinale = value; }
+        public static bool ViertelFinale { get => viertelFinale; set => viertelFinale = value; }
+        public static bool FinalFinale { get => finalFinale; set => finalFinale = value; }
 
         public Spieler(string name,string club,string punkte, string R1,string R2,string R3,string R4,string Viertel,string Halb,string Fin)
         {

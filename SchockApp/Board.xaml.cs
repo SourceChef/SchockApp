@@ -26,10 +26,10 @@ namespace SchockApp
             InitializeComponent();
         }
         public string runde = "1";
-        public int T3 = SpielfeldCode.Anzahl3;
-        public int T4 = SpielfeldCode.Anzahl4;
-        public int T5 = SpielfeldCode.Anzahl5;
-        public int gesamtT = SpielfeldCode.gesamtTische;
+        public int T3 = SpielfeldCode.Anzahl31;
+        public int T4 = SpielfeldCode.Anzahl41;
+        public int T5 = SpielfeldCode.Anzahl51;
+        public int gesamtT = SpielfeldCode.GesamtTische;
         public bool firstTime = true;
         private int spielfeldCodeCheck()
         {
@@ -71,9 +71,9 @@ namespace SchockApp
             int zaehlerVf = 0;
             int zaehlerHf = 0;
             int zaehlerFi = 0;
-            int tisch3Zahl = SpielfeldCode.Anzahl3;
-            int tisch4Zahl = SpielfeldCode.Anzahl4;
-            int tisch5Zahl = SpielfeldCode.Anzahl5;
+            int tisch3Zahl = SpielfeldCode.Anzahl31;
+            int tisch4Zahl = SpielfeldCode.Anzahl41;
+            int tisch5Zahl = SpielfeldCode.Anzahl51;
             foreach (var item in Spieler.spielers)
             {
                 if (item.PunkteR1 != "0")
@@ -112,49 +112,49 @@ namespace SchockApp
             if(zaehler1 == 0 || zaehler1 < Spieler.spielers.Count)
             {
                if (zaehler1 == 0) runde = "1";
-                if (zaehler1 == 0 && SpielfeldCode.shuffelR1 == false)
+                if (zaehler1 == 0 && SpielfeldCode.ShuffelR1 == false)
                 {
                     MyExtensions.Shuffle(Spieler.spielers);
-                    SpielfeldCode.shuffelR1 = true;
+                    SpielfeldCode.ShuffelR1 = true;
                 }
             }
             else if (zaehler2 == 0 || zaehler2 < Spieler.spielers.Count)
             {
                 runde = "2";
-                if(zaehler2==0 && SpielfeldCode.shuffelR2 == false)MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.shuffelR2 = true;
+                if(zaehler2==0 && SpielfeldCode.ShuffelR2 == false)MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.ShuffelR2 = true;
             }
             else if (zaehler3 == 0 || zaehler3 < Spieler.spielers.Count)
             {
                 runde = "3";
-                if (zaehler3 == 0 && SpielfeldCode.shuffelR3 == false) MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.shuffelR3 = true;
+                if (zaehler3 == 0 && SpielfeldCode.ShuffelR3 == false) MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.ShuffelR3 = true;
             }
             else if (zaehler4 == 0 || zaehler4 < Spieler.spielers.Count)
             {
                 runde = "4";
-                if (zaehler4 == 0 && SpielfeldCode.shuffelR4 == false) MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.shuffelR4 = true;
+                if (zaehler4 == 0 && SpielfeldCode.ShuffelR4 == false) MyExtensions.Shuffle(Spieler.spielers); SpielfeldCode.ShuffelR4 = true;
             }
             else if (zaehlerVf == 0 || zaehlerVf < Spieler.spielerFinale.Count)
             {
                 runde = "Viertelfinale";
-                if (zaehlerVf == 0 && SpielfeldCode.shuffelVf == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.shuffelVf = true;
-                Spieler.viertelFinale = true;
-                SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl3,SpielfeldCode.Anzahl4,SpielfeldCode.Anzahl5);
+                if (zaehlerVf == 0 && SpielfeldCode.ShuffelVf == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.ShuffelVf = true;
+                Spieler.ViertelFinale = true;
+                SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl31,SpielfeldCode.Anzahl41,SpielfeldCode.Anzahl51);
                 Spieler.elemination();
             }
             else if (zaehlerHf == 0 || zaehlerHf < Spieler.spielerFinale.Count)
             {
                 runde = "Halbfinale";
-                if (zaehlerHf == 0 && SpielfeldCode.shuffelHf == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.shuffelHf = true;
-                Spieler.halbFinale = true;
-                SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl3, SpielfeldCode.Anzahl4, SpielfeldCode.Anzahl5);
+                if (zaehlerHf == 0 && SpielfeldCode.ShuffelHf == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.ShuffelHf = true;
+                Spieler.HalbFinale = true;
+                SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl31, SpielfeldCode.Anzahl41, SpielfeldCode.Anzahl51);
                 Spieler.eleminationHf();
             }
             else if (zaehlerFi == 0 || zaehlerFi < Spieler.spielerFinale.Count)
             {
                 runde = "Finale";
-                if (zaehlerFi == 0 && SpielfeldCode.shuffelF == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.shuffelF = true;
-                Spieler.finalFinale = true;
-                SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl3, SpielfeldCode.Anzahl4, SpielfeldCode.Anzahl5);
+                if (zaehlerFi == 0 && SpielfeldCode.ShuffelF == false) MyExtensions.Shuffle(Spieler.spielerFinale); SpielfeldCode.ShuffelF = true;
+                Spieler.FinalFinale = true;
+                SpielfeldCode.tischeAktuallisieren(SpielfeldCode.Anzahl31, SpielfeldCode.Anzahl41, SpielfeldCode.Anzahl51);
                 Spieler.eleminationFi();
             }
             #endregion
@@ -204,7 +204,7 @@ namespace SchockApp
                 colDef18.MinWidth = 100;
                 colDef19.MinWidth = 100;
                 colDef20.MaxWidth = 50;
-            if (Spieler.viertelFinale == true)
+            if (Spieler.ViertelFinale == true)
             {
                 colDef11.MinWidth = 1;
                 colDef12.MinWidth = 1;
@@ -319,7 +319,7 @@ namespace SchockApp
             Grid.SetRow(titel, 0);
             Grid.SetColumn(titel, 9);
             Grid.SetColumnSpan(titel, 11);
-            if (Spieler.viertelFinale == true)
+            if (Spieler.ViertelFinale == true)
             {
                 Grid.SetColumn(titel, 1);
                 Grid.SetColumnSpan(titel, 6);
@@ -327,7 +327,7 @@ namespace SchockApp
             test.Children.Add(titel);
             int z = spielfeldCodeCheck();
             #region tableimage and labels
-            for (int i = 1; i <= (SpielfeldCode.gesamtTische); i++)
+            for (int i = 1; i <= (SpielfeldCode.GesamtTische); i++)
             {
                     if (i % 2 != 0)
                     {
@@ -473,7 +473,7 @@ namespace SchockApp
             int colTextbox = 3;
             int rowBorder = 2;
             int colBorder = 2;
-            for (int i = 1; i <= SpielfeldCode.gesamtTische; i++)
+            for (int i = 1; i <= SpielfeldCode.GesamtTische; i++)
             {
                 if (z != 0){
                     for (int j = 0; j < z; j++)
@@ -543,7 +543,7 @@ namespace SchockApp
             Grid.SetRow(button1, 16);
             Grid.SetColumn(button1, 2);
             Grid.SetColumnSpan(button1, 3);
-            if(Spieler.viertelFinale == true)
+            if(Spieler.ViertelFinale == true)
             {
                 Grid.SetColumn(button1, 8);
                 Grid.SetColumnSpan(button1, 8);
@@ -561,7 +561,7 @@ namespace SchockApp
             Grid.SetRow(button2, 16);
             Grid.SetColumn(button2, 4);
             Grid.SetColumnSpan(button2, 5);
-            if (Spieler.viertelFinale == true)
+            if (Spieler.ViertelFinale == true)
             {
                 Grid.SetColumn(button2, 8);
                 Grid.SetColumnSpan(button2, 8);
@@ -578,7 +578,7 @@ namespace SchockApp
             Grid.SetRow(button3, 16);
             Grid.SetColumn(button3, 8);
             Grid.SetColumnSpan(button3, 9);
-            if (Spieler.viertelFinale == true)
+            if (Spieler.ViertelFinale == true)
             {
                 Grid.SetColumn(button3, 8);
                 Grid.SetColumnSpan(button3, 8);
@@ -595,7 +595,7 @@ namespace SchockApp
             Grid.SetRow(button4, 16);
             Grid.SetColumn(button4, 11);
             Grid.SetColumnSpan(button4, 12);
-            if (Spieler.viertelFinale == true)
+            if (Spieler.ViertelFinale == true)
             {
                 Grid.SetColumn(button4, 8);
                 Grid.SetColumnSpan(button4, 8);
@@ -603,9 +603,9 @@ namespace SchockApp
             }
 
             test.Children.Add(button4);
-            SpielfeldCode.Anzahl3 = tisch3Zahl;
-            SpielfeldCode.Anzahl4 = tisch4Zahl;
-            SpielfeldCode.Anzahl5 = tisch5Zahl;
+            SpielfeldCode.Anzahl31 = tisch3Zahl;
+            SpielfeldCode.Anzahl41 = tisch4Zahl;
+            SpielfeldCode.Anzahl51 = tisch5Zahl;
             foreach (var item in textBoxeList)
             {
                 item.SelectAll();
@@ -631,7 +631,7 @@ namespace SchockApp
         {
             for (int i = 0; i < 1; i++)
             {
-                if (Spieler.viertelFinale == false)
+                if (Spieler.ViertelFinale == false)
                 {
 
                     if (Spieler.spielers.Count <= cout)
@@ -690,7 +690,7 @@ namespace SchockApp
     }
         private void backButton(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow(SpielfeldCode.Anzahl3_1, SpielfeldCode.Anzahl4_1, SpielfeldCode.Anzahl5_1);
+            MainWindow mainWindow = new MainWindow(SpielfeldCode.Anzahl3_11, SpielfeldCode.Anzahl4_11, SpielfeldCode.Anzahl5_11);
             this.Close();
             mainWindow.ShowDialog();
         }
@@ -802,7 +802,7 @@ namespace SchockApp
                 if(check == true)
                 {
                         saveButton(sender, e);
-                        MainWindow mainWindow = new MainWindow(SpielfeldCode.Anzahl3_1,SpielfeldCode.Anzahl4_1,SpielfeldCode.Anzahl5_1);
+                        MainWindow mainWindow = new MainWindow(SpielfeldCode.Anzahl3_11,SpielfeldCode.Anzahl4_11,SpielfeldCode.Anzahl5_11);
                         this.Close();
                         mainWindow.ShowDialog();
 

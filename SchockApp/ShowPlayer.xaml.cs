@@ -38,7 +38,7 @@ namespace SchockApp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            MainWindow mainWindow = new MainWindow(SpielfeldCode.Anzahl3_1, SpielfeldCode.Anzahl4_1, SpielfeldCode.Anzahl5_1);
+            MainWindow mainWindow = new MainWindow(SpielfeldCode.Anzahl3_11, SpielfeldCode.Anzahl4_11, SpielfeldCode.Anzahl5_11);
             this.Close();
             mainWindow.ShowDialog();
         }
